@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    container_name: node-app-new
+  
+
+    ports:
+      - "3000:3000"
+
+    restart: always
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+    volumes:
+      - app_logs:/app/logs
+
+volumes:
+  app_logs:
